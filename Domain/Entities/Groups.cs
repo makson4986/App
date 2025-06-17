@@ -8,4 +8,6 @@ public class Groups
     public Courses Course { get; set; } = null!;
 
     public ICollection<StudentInGroups> Students { get; set; } = new List<StudentInGroups>();
+
+    public ICollection<Lessons> Lessons { get; set; } = new List<Lessons>();
 }

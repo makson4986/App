@@ -10,4 +10,5 @@ public class Users
     public Role Role { get; set; }
 
     public ICollection<Courses> Courses { get; set; } = new List<Courses>();
+    public ICollection<Attendances> Attendances { get; set; } = new List<Attendances>();
 }
