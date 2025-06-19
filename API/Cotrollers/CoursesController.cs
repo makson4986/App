@@ -1,36 +1,51 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("api/[controller]")]
 public class CoursesController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult GetAll()
+    private readonly CourseService _courseService;
+
+    public CoursesController(CourseService courseService)
     {
-        return Ok();
+        _courseService = courseService;
+    }
+
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<CourseResponseDto>>> GetAllAsync()
+    {
+        var courses = await _courseService.GetAllAsync();
+        return Ok(courses);
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetAll(Guid id)
+    public async Task<IActionResult> GetAsync(int id)
     {
-        return Ok();
+
+        var course = await _courseService.GetAsync(id);
+        return Ok(course);
     }
 
     [HttpPost]
-    public IActionResult CreateNew()
+    public async Task<IActionResult> AddAsync(CourseRequestDto courseRequestDto)
     {
-        return Ok();
+        CourseResponseDto result = await _courseService.AddAsync(courseRequestDto);
+        return Created(string.Empty, result);
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(Guid id)
+    public async Task<IActionResult> UpdateAsync(int id, CourseRequestDto courseRequestDto)
     {
+        await _courseService.UpdateAsync(id, courseRequestDto);
         return Ok();
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(Guid id)
+    public async Task<IActionResult> RemoveAsync(int id)
     {
+        await _courseService.RemoveAsync(id);
         return Ok();
     }
 }

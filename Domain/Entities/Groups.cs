@@ -1,9 +1,9 @@
 public class Groups
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public required string Name { get; set; }
 
-    public Guid CourseId { get; set; }
+    public int CourseId { get; set; }
 
     public Courses Course { get; set; } = null!;
 

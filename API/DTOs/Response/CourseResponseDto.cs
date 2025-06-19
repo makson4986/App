@@ -1,0 +1,1 @@
+public record CourseResponseDto(int Id, string Name, string description, string CreatedById);

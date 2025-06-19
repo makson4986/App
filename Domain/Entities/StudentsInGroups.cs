@@ -1,8 +1,8 @@
 public class StudentInGroups
 {
-    public Guid Id { get; set; }
-    public Guid StudentId { get; set; }
-    public Guid GroupId { get; set; }
+    public int Id { get; set; }
+    public int StudentId { get; set; }
+    public int GroupId { get; set; }
 
     public Users Student { get; set; } = null!;
 
