@@ -9,6 +9,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<CourseRepository>();
 builder.Services.AddScoped<CourseService>();
+builder.Services.AddScoped<GroupRepository>();
+builder.Services.AddScoped<GroupsService>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 

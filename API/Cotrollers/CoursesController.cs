@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/course")]
 public class CoursesController : ControllerBase
 {
     private readonly CourseService _courseService;

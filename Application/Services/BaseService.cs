@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using AutoMapper;
 
 public abstract class BaseService<TEntity, TRequestDto, TResponseDto> where TEntity : class
@@ -29,9 +30,9 @@ public abstract class BaseService<TEntity, TRequestDto, TResponseDto> where TEnt
         return _mapper.Map<TResponseDto>(entity);
     }
 
-    public async Task<TResponseDto> AddAsync(CourseRequestDto courseRequestDto)
+    public async Task<TResponseDto> AddAsync(TRequestDto requestDto)
     {
-        TEntity entity = _mapper.Map<TEntity>(courseRequestDto);
+        TEntity entity = _mapper.Map<TEntity>(requestDto);
         TEntity result = await _repository.AddAsync(entity);
         return _mapper.Map<TResponseDto>(result);
     }
@@ -39,6 +40,7 @@ public abstract class BaseService<TEntity, TRequestDto, TResponseDto> where TEnt
     public async Task UpdateAsync(int id, TRequestDto requestDto)
     {
         TEntity entity = await GetEntityAsync(id);
+
         _mapper.Map(requestDto, entity);
         await _repository.UpdateAsync(entity);
     }

@@ -6,5 +6,8 @@ public class MappingProfile : Profile
     {
         CreateMap<CourseRequestDto, Courses>();
         CreateMap<Courses, CourseResponseDto>();
+
+        CreateMap<GroupRequestDto, Groups>();
+        CreateMap<Groups, GroupResponseDto>();
     }
 }

@@ -1,30 +1,44 @@
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/groups")]
 public class GroupsController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult GetAll()
+    private readonly GroupsService _groupsService;
+
+    public GroupsController(GroupsService groupsService)
     {
-        return Ok();
+        _groupsService = groupsService;
     }
 
-    [HttpPost]
-    public IActionResult CreateNew()
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllAsyncs(string filterByGroup)
     {
-        return Ok();
+
+        var course = await _groupsService.GetAllAsync(filterByGroup);
+        return Ok(course);
+    }
+
+
+    [HttpPost]
+    public async Task<IActionResult> AddAsync(GroupRequestDto groupRequestDto)
+    {
+        GroupResponseDto result = await _groupsService.AddAsync(groupRequestDto);
+        return Created(string.Empty, result);
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(Guid id)
+    public async Task<IActionResult> UpdateAsync(int id, GroupRequestDto groupRequestDto)
     {
+        await _groupsService.UpdateAsync(id, groupRequestDto);
         return Ok();
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(Guid id)
+    public async Task<IActionResult> RemoveAsync(int id)
     {
+        await _groupsService.RemoveAsync(id);
         return Ok();
     }
 }
