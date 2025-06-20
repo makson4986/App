@@ -1,6 +1,6 @@
-public class GroupRepository : BaseRepository<Groups>
+public class GroupRepository : BaseRepository<Group>
 {
-    public GroupRepository(ApplicationContext context) : base(context)
+    public GroupRepository(ApplicationDbContext context) : base(context)
     {
     }
 }

@@ -1,10 +1,10 @@
-public class Attendances
+public class Attendance
 {
     public int Id { get; set; }
     public int LessonId { get; set; }
     public int StudentId { get; set; }
     public bool IsPresent { get; set; }
 
-    public Lessons Lesson { get; set; } = null!;
-    public Users Student { get; set; } = null!;
+    public Lesson Lesson { get; set; } = null!;
+    public User Student { get; set; } = null!;
 }

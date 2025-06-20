@@ -1,4 +1,4 @@
-public class Lessons
+public class Lesson
 {
     public int Id { get; set; }
     public DateTime Date { get; set; }
@@ -6,7 +6,7 @@ public class Lessons
 
     public int GroupId { get; set; }
 
-    public Groups Group { get; set; } = null!;
+    public Group Group { get; set; } = null!;
 
-    public ICollection<Attendances> Attendances { get; set; } = new List<Attendances>();
+    public ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
 }

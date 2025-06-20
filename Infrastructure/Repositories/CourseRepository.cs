@@ -1,9 +1,9 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
-public class CourseRepository : BaseRepository<Courses>
+public class CourseRepository : BaseRepository<Course>
 {
-    public CourseRepository(ApplicationContext context) : base(context)
+    public CourseRepository(ApplicationDbContext context) : base(context)
     {
         
     }

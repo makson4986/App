@@ -4,10 +4,10 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<CourseRequestDto, Courses>();
-        CreateMap<Courses, CourseResponseDto>();
+        CreateMap<CourseRequestDto, Course>();
+        CreateMap<Course, CourseResponseDto>();
 
-        CreateMap<GroupRequestDto, Groups>();
-        CreateMap<Groups, GroupResponseDto>();
+        CreateMap<GroupRequestDto, Group>();
+        CreateMap<Group, GroupResponseDto>();
     }
 }

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 public abstract class BaseRepository<TEntity> where TEntity : class
 {
     protected readonly DbSet<TEntity> _dbSet;
-    protected readonly ApplicationContext _context;
+    protected readonly ApplicationDbContext _context;
 
-    public BaseRepository(ApplicationContext context)
+    public BaseRepository(ApplicationDbContext context)
     {
         _context = context;
         _dbSet = context.Set<TEntity>();

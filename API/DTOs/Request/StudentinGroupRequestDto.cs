@@ -1,0 +1,1 @@
+public record StudentInGroupRequestDto(int StudentId, int GroupId);

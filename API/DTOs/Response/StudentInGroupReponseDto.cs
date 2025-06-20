@@ -1,0 +1,1 @@
+public record StudentInGroupResponseDto(int Id, int StudentId, int GroupId);

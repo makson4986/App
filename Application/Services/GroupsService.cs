@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using AutoMapper;
 
-public class GroupsService : BaseService<Groups, GroupRequestDto, GroupResponseDto>
+public class GroupsService : BaseService<Group, GroupRequestDto, GroupResponseDto>
 {
     public GroupsService(GroupRepository repository, IMapper mapper) : base(repository, mapper)
     {
@@ -12,7 +12,7 @@ public class GroupsService : BaseService<Groups, GroupRequestDto, GroupResponseD
         var groups = await _repository.GetAllAsync(g => g.Course.Name == Filter);
         var result = new List<GroupResponseDto>();
 
-        foreach (Groups group in groups)
+        foreach (Group group in groups)
         {
             result.Add(_mapper.Map<GroupResponseDto>(group));
         }
