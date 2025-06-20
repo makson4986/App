@@ -1,0 +1,1 @@
+public record LessonResponseDto(int id, DateTime Date, string Topic, int GroupId);

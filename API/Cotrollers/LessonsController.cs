@@ -1,36 +1,45 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/lessons")]
 public class LessonsController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult GetAll()
+    private readonly LessonsService _lessonsService;
+
+
+    public LessonsController(LessonsService lessonsService)
     {
-        return Ok();
+        _lessonsService = lessonsService;
     }
 
-    [HttpGet("{id}")]
-    public IActionResult GetAll(Guid id)
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<LessonResponseDto>>> GetByFilter(int? courseId = null, int? groupId = null)
     {
-        return Ok();
+        var lessons = await _lessonsService.GetByFilter(courseId, groupId);
+        return Ok(lessons);
     }
+
 
     [HttpPost]
-    public IActionResult CreateNew()
+    public async Task<IActionResult> CreateNew(LessonRequestDto lessonRequestDto)
     {
-        return Ok();
+        var result = await _lessonsService.AddAsync(lessonRequestDto);
+        return Created(string.Empty, result);
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(Guid id)
+    public async Task<IActionResult> Update(int id, LessonRequestDto lessonRequestDto)
     {
+        await _lessonsService.UpdateAsync(id, lessonRequestDto);
         return Ok();
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(Guid id)
+    public async Task<IActionResult> Delete(int id)
     {
+        await _lessonsService.RemoveAsync(id);
         return Ok();
     }
 }

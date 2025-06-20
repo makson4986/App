@@ -18,7 +18,7 @@ public class StudentInGroupController : ControllerBase
         return Created(string.Empty, result);
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{studentId}")]
     public async Task<IActionResult> RemoveAsync(int id)
     {
         await _studentInGroupService.RemoveAsync(id);
