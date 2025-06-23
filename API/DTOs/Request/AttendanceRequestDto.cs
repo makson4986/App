@@ -1,0 +1,1 @@
+public record AttendanceRequestDto(int StudentId, bool IsPresent);

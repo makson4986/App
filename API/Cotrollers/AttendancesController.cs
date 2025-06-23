@@ -1,36 +1,36 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api")]
 public class AttendancesController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult GetAll()
+    private readonly AttendanceService _attendanceService;
+
+    public AttendancesController(AttendanceService attendanceService)
     {
-        return Ok();
+        _attendanceService = attendanceService;
     }
 
-    [HttpGet("{id}")]
-    public IActionResult GetAll(Guid id)
+
+    [HttpGet("lessons/{lessonId}/attendance")]
+    public async Task<IActionResult> GetAsync(int lessonId)
     {
-        return Ok();
+        var result = await _attendanceService.GetAllAsync(lessonId);
+        return Ok(result);
     }
 
-    [HttpPost]
-    public IActionResult CreateNew()
+    [HttpPost("lessons/{lessonId}/attendance")]
+    public async Task<IActionResult> MarkBulk(int id, IEnumerable<AttendanceRequestDto> attendanceRequestDto)
     {
-        return Ok();
+        var result = await _attendanceService.MarkBulk(id, attendanceRequestDto);
+        return Created(string.Empty, result);
     }
 
-    [HttpPut("{id}")]
-    public IActionResult Update(Guid id)
+    [HttpPut("attendance/{attendancedId}")]
+    public async Task<IActionResult> UpdateAsync(int attendancedId, AttendanceRequestDto attendanceRequestDto)
     {
-        return Ok();
-    }
-
-    [HttpDelete("{id}")]
-    public IActionResult Delete(Guid id)
-    {
+        await _attendanceService.UpdateAsync(attendancedId, attendanceRequestDto);
         return Ok();
     }
 }

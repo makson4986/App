@@ -1,0 +1,1 @@
+public record AttendanceReponseDto(int id, int LessonId, int StudentId, bool IsPresent);
