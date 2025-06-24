@@ -1,1 +1,1 @@
-public record CourseResponseDto(int Id, string Name, string description, string CreatedById);
+public record CourseResponseDto(int Id, string Name, string description, UserProfileDto CreatedBy);

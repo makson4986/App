@@ -24,7 +24,7 @@ public abstract class BaseService<TEntity, TRequestDto, TResponseDto> where TEnt
         return _mapper.Map<TResponseDto>(entity);
     }
 
-    public async Task<TResponseDto> AddAsync(TRequestDto requestDto)
+    public virtual async Task<TResponseDto> AddAsync(TRequestDto requestDto)
     {
         TEntity entity = _mapper.Map<TEntity>(requestDto);
         TEntity result = await _repository.AddAsync(entity);
