@@ -1,1 +1,0 @@
-public record UserRequestDto(string Email, string PasswordHash, Role Role);

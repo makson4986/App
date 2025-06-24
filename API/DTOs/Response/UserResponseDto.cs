@@ -1,1 +1,0 @@
-public record UserReponseDto(int Id, string Email, Role Role);

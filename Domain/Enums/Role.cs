@@ -1,4 +1,4 @@
 public enum Role
 {
-    User, ADMIN
+    STUDENT, TEACHER
 }

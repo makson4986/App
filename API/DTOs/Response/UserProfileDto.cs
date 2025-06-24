@@ -1,0 +1,1 @@
+public record UserProfileDto(string Email, Role Role);

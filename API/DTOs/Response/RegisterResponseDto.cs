@@ -1,0 +1,1 @@
+public record RegisterResponseDto(int Id, string Email, Role Role);

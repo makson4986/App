@@ -15,13 +15,7 @@ public abstract class BaseService<TEntity, TRequestDto, TResponseDto> where TEnt
     public virtual async Task<IEnumerable<TResponseDto>> GetAllAsync()
     {
         var entities = await _repository.GetAllAsync();
-        var result = new List<TResponseDto>();
-
-        foreach (TEntity entity in entities)
-        {
-            result.Add(_mapper.Map<TResponseDto>(entity));
-        }
-        return result;
+        return _mapper.Map<IEnumerable<TResponseDto>>(entities);
     }
 
     public virtual async Task<TResponseDto> GetAsync(int id)

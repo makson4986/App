@@ -2,16 +2,22 @@ using AutoMapper;
 
 public class StudentInGroupService : BaseService<StudentInGroup, StudentRequestDto, StudentInGroupResponseDto>
 {
-    private readonly UserService _userService;
+    private readonly AuthService _authService;
 
-    public StudentInGroupService(StudentInGroupRepository repository, IMapper mapper, UserService userService) : base(repository, mapper)
+    public StudentInGroupService(StudentInGroupRepository repository, IMapper mapper, AuthService authService) : base(repository, mapper)
     {
-        _userService = userService;
+        _authService = authService;
     }
 
     public async Task<StudentInGroupResponseDto> AddStudent(int groupId, StudentRequestDto studentRequestDto)
     {
-        var user = await _userService.GetByEmail(studentRequestDto.Email);
+        var user = await _authService.GetByEmail(studentRequestDto.Email);
+
+        if (user == null)
+        {
+            throw new KeyNotFoundException("Student isn't found!");
+        }
+
         var dto = new StudentInGroupRequestDto(groupId, user.Id);
 
 

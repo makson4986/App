@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -13,9 +14,34 @@ public class AuthController : ControllerBase
 
 
     [HttpPost("register")]
-    public async Task<ActionResult> SignUp(UserRequestDto userRequestDto)
+    public async Task<IActionResult> Register(RegisterDto userRequestDto)
     {
-        await _authService.SignUp(userRequestDto);
-        return Ok();
+        var registerResult = await _authService.Register(userRequestDto);
+
+        if (!registerResult)
+        {
+            return Conflict("User already exists!");
+        }
+
+        return Created();
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(LoginDto loginDto)
+    {
+        var token = await _authService.Login(loginDto);
+
+        if (token == null)
+        {
+            return Unauthorized("Invalid credentials!");
+        }
+
+        return Ok(token);
+    }
+
+    [HttpGet("profile")]
+    public IActionResult Profile()
+    {
+        return Ok(_authService.Profile());
     }
 }

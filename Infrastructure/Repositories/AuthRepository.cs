@@ -1,9 +1,8 @@
-using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 
-public class UserRepository : BaseRepository<User>
+public class AuthRepository : BaseRepository<User>
 {
-    public UserRepository(ApplicationDbContext context) : base(context)
+    public AuthRepository(ApplicationDbContext context) : base(context)
     {
     }
 

@@ -9,5 +9,8 @@ public class MappingProfile : Profile
 
         CreateMap<GroupRequestDto, Group>();
         CreateMap<Group, GroupResponseDto>();
+
+        // CreateMap<User, RegisterDto>();
+        CreateMap<RegisterDto, User>();
     }
 }
