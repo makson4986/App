@@ -21,9 +21,9 @@ public class AttendancesController : ControllerBase
     }
 
     [HttpPost("lessons/{lessonId}/attendance")]
-    public async Task<IActionResult> MarkBulk(int id, IEnumerable<AttendanceRequestDto> attendanceRequestDto)
+    public async Task<IActionResult> MarkBulk(int lessonId, IEnumerable<AttendanceRequestDto> attendanceRequestDto)
     {
-        var result = await _attendanceService.MarkBulk(id, attendanceRequestDto);
+        var result = await _attendanceService.MarkBulk(lessonId, attendanceRequestDto);
         return Created(string.Empty, result);
     }
 

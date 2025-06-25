@@ -22,6 +22,8 @@ builder.Services.AddScoped<AuthRepository>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<LessonsService>();
 builder.Services.AddScoped<LessonRepository>();
+builder.Services.AddScoped<AttendanceService>();
+builder.Services.AddScoped<AttendanceRepository>();
 
 
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
