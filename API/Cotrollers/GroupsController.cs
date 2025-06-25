@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -13,15 +14,16 @@ public class GroupsController : ControllerBase
 
 
     [HttpGet]
-    public async Task<IActionResult> GetAllAsyncs(string filterByGroup)
+    [Authorize]
+    public async Task<IActionResult> GetAllAsyncs(string filterByCourse)
     {
-
-        var course = await _groupsService.GetAllAsync(filterByGroup);
+        var course = await _groupsService.GetAllAsync(filterByCourse);
         return Ok(course);
     }
 
 
     [HttpPost]
+    [Authorize(Roles = "TEACHER")]
     public async Task<IActionResult> AddAsync(GroupRequestDto groupRequestDto)
     {
         GroupResponseDto result = await _groupsService.AddAsync(groupRequestDto);
@@ -29,6 +31,7 @@ public class GroupsController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "TEACHER")]
     public async Task<IActionResult> UpdateAsync(int id, GroupRequestDto groupRequestDto)
     {
         await _groupsService.UpdateAsync(id, groupRequestDto);
@@ -36,6 +39,7 @@ public class GroupsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "TEACHER")]
     public async Task<IActionResult> RemoveAsync(int id)
     {
         await _groupsService.RemoveAsync(id);

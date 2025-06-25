@@ -1,1 +1,1 @@
-public record GroupResponseDto(int Id, string Name, int CreatedById);
+public record GroupResponseDto(int Id, string Name, int CourseId);

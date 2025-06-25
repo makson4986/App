@@ -9,7 +9,7 @@ public class GroupsService : BaseService<Group, GroupRequestDto, GroupResponseDt
 
     public async Task<IEnumerable<GroupResponseDto>> GetAllAsync(string Filter)
     {
-        var groups = await _repository.GetAllAsync(g => g.Course.Name == Filter);
+        var groups = await ((GroupRepository)_repository).GetAllAsync(g => g.Course.Name == Filter);
         return _mapper.Map<IEnumerable<GroupResponseDto>>(groups);
     }
 }
