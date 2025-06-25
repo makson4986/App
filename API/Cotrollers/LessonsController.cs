@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -15,6 +16,7 @@ public class LessonsController : ControllerBase
 
 
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<IEnumerable<LessonResponseDto>>> GetByFilter(int? courseId = null, int? groupId = null)
     {
         var lessons = await _lessonsService.GetByFilter(courseId, groupId);
@@ -23,6 +25,7 @@ public class LessonsController : ControllerBase
 
 
     [HttpPost]
+    [Authorize(Roles = "TEACHER")]
     public async Task<IActionResult> CreateNew(LessonRequestDto lessonRequestDto)
     {
         var result = await _lessonsService.AddAsync(lessonRequestDto);
@@ -30,6 +33,7 @@ public class LessonsController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "TEACHER")]
     public async Task<IActionResult> Update(int id, LessonRequestDto lessonRequestDto)
     {
         await _lessonsService.UpdateAsync(id, lessonRequestDto);
@@ -37,6 +41,7 @@ public class LessonsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "TEACHER")]
     public async Task<IActionResult> Delete(int id)
     {
         await _lessonsService.RemoveAsync(id);

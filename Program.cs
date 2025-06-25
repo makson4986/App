@@ -20,6 +20,8 @@ builder.Services.AddScoped<StudentInGroupService>();
 builder.Services.AddScoped<StudentInGroupRepository>();
 builder.Services.AddScoped<AuthRepository>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+builder.Services.AddScoped<LessonsService>();
+builder.Services.AddScoped<LessonRepository>();
 
 
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
