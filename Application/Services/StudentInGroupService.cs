@@ -18,10 +18,24 @@ public class StudentInGroupService : BaseService<StudentInGroup, StudentRequestD
             throw new KeyNotFoundException("Student isn't found!");
         }
 
-        var dto = new StudentInGroupRequestDto(groupId, user.Id);
+        var dto = new StudentInGroupRequestDto(user.Id, groupId);
 
 
         var response = await _repository.AddAsync(_mapper.Map<StudentInGroup>(dto));
         return _mapper.Map<StudentInGroupResponseDto>(response);
+    }
+
+    public async Task RemoveAsync(int studentId)
+    {
+
+        var result = await _repository.GetAllAsync(s => s.StudentId == studentId);
+        var entity = result.FirstOrDefault();
+
+        if (entity == null)
+        {
+            throw new KeyNotFoundException("Not found!");
+        }
+
+        await _repository.RemoveAsync(entity);
     }
 }   

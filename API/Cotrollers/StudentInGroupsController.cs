@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -11,7 +12,8 @@ public class StudentInGroupController : ControllerBase
         _studentInGroupService = studentInGroupService;
     }
 
-    [HttpPost()]
+    [HttpPost]
+    [Authorize(Roles = "TEACHER")]
     public async Task<IActionResult> AddAsync(int groupId, StudentRequestDto studentRequestDto)
     {
         StudentInGroupResponseDto result = await _studentInGroupService.AddStudent(groupId, studentRequestDto);
@@ -19,9 +21,10 @@ public class StudentInGroupController : ControllerBase
     }
 
     [HttpDelete("{studentId}")]
-    public async Task<IActionResult> RemoveAsync(int id)
+    [Authorize(Roles = "TEACHER")]
+    public async Task<IActionResult> RemoveAsync(int studentId)
     {
-        await _studentInGroupService.RemoveAsync(id);
+        await _studentInGroupService.RemoveAsync(studentId);
         return Ok();
     }
 }

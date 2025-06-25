@@ -16,6 +16,9 @@ public class MappingProfile : Profile
         CreateMap<AttendanceRequestDto, Attendance>();
         CreateMap<Attendance, AttendanceReponseDto>();
 
+        CreateMap<StudentInGroupRequestDto, StudentInGroup>();
+        CreateMap<StudentInGroup, StudentInGroupResponseDto>();
+
         CreateMap<RegisterDto, User>();
         CreateMap<UserProfileDto, User>();
         CreateMap<User, UserProfileDto>();

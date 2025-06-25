@@ -31,7 +31,7 @@ public abstract class BaseService<TEntity, TRequestDto, TResponseDto> where TEnt
         return _mapper.Map<TResponseDto>(result);
     }
 
-    public async Task UpdateAsync(int id, TRequestDto requestDto)
+    public virtual async Task UpdateAsync(int id, TRequestDto requestDto)
     {
         TEntity entity = await GetEntityAsync(id);
 
@@ -39,7 +39,7 @@ public abstract class BaseService<TEntity, TRequestDto, TResponseDto> where TEnt
         await _repository.UpdateAsync(entity);
     }
 
-    public async Task RemoveAsync(int id)
+    public virtual async Task RemoveAsync(int id)
     {
         TEntity entity = await GetEntityAsync(id);
         await _repository.RemoveAsync(entity);

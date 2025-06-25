@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -14,6 +15,7 @@ public class AttendancesController : ControllerBase
 
 
     [HttpGet("lessons/{lessonId}/attendance")]
+    [Authorize]
     public async Task<IActionResult> GetAsync(int lessonId)
     {
         var result = await _attendanceService.GetAllAsync(lessonId);
@@ -21,6 +23,7 @@ public class AttendancesController : ControllerBase
     }
 
     [HttpPost("lessons/{lessonId}/attendance")]
+    [Authorize(Roles = "TEACHER")]
     public async Task<IActionResult> MarkBulk(int lessonId, IEnumerable<AttendanceRequestDto> attendanceRequestDto)
     {
         var result = await _attendanceService.MarkBulk(lessonId, attendanceRequestDto);
@@ -28,6 +31,7 @@ public class AttendancesController : ControllerBase
     }
 
     [HttpPut("attendance/{attendancedId}")]
+    [Authorize(Roles = "TEACHER")]
     public async Task<IActionResult> UpdateAsync(int attendancedId, AttendanceRequestDto attendanceRequestDto)
     {
         await _attendanceService.UpdateAsync(attendancedId, attendanceRequestDto);

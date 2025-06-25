@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -40,6 +41,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpGet("profile")]
+    [Authorize]
     public IActionResult Profile()
     {
         return Ok(_authService.Profile());
